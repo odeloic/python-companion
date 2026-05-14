@@ -26,12 +26,25 @@ def run_length_encode(s: str) -> list[tuple[str, int]]:
     Returns:
         A list of (char, count) tuples, one per consecutive run.
     """
-    raise NotImplementedError
+    if not s:
+        return []
+    result = []
+    current = s[0]
+    count = 1
+
+    for i in range(1, len(s)):
+        if s[i] == current:
+            count += 1
+        else:
+            result.append((current, count))
+            current = s[i]
+            count = 1
+    result.append((current, count))
+    return result
 
 
 if __name__ == "__main__":
-    # print(run_length_encode("aaabbc"))   # [("a", 3), ("b", 2), ("c", 1)]
-    # print(run_length_encode("aabbaa"))   # [("a", 2), ("b", 2), ("a", 2)]
-    # print(run_length_encode("abcd"))     # [("a", 1), ("b", 1), ("c", 1), ("d", 1)]
-    # print(run_length_encode(""))         # []
-    pass
+    print(run_length_encode("aaabbc"))  # [("a", 3), ("b", 2), ("c", 1)]
+    print(run_length_encode("aabbaa"))  # [("a", 2), ("b", 2), ("a", 2)]
+    print(run_length_encode("abcd"))  # [("a", 1), ("b", 1), ("c", 1), ("d", 1)]
+    print(run_length_encode(""))  # []
